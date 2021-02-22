@@ -1,0 +1,7 @@
+{
+  "name": "client1",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "ionic-angular"
+}
