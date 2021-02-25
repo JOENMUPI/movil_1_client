@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "client1",
+  "appName": "movil",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

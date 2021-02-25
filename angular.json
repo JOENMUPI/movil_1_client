@@ -31,14 +31,7 @@
                 "output": "./svg"
               }
             ],
-            "styles": [
-              {
-                "input": "src/theme/variables.scss"
-              },
-              {
-                "input": "src/global.scss"
-              }
-            ],
+            "styles": ["src/theme/variables.scss", "src/global.scss"],
             "scripts": []
           },
           "configurations": {
@@ -52,7 +45,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -174,7 +166,6 @@
     }
   },
   "cli": {
-    "analytics": "a8b73ba8-5b75-44d3-96e7-c7582b219421",
     "defaultCollection": "@ionic/angular-toolkit"
   },
   "schematics": {
