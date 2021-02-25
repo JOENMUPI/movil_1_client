@@ -11,7 +11,6 @@ import { Response } from 'src/app/interfaces/response.model';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit { 
-
   constructor(  
     private bs: BasicService,
     private router: Router,
@@ -63,7 +62,7 @@ export class LoginPage implements OnInit {
 
           case 'Fail':
             this.bs.toast(res.message, 5000, 'top');
-            res.body.forEach(element  => {
+            res.body.errors.forEach(element  => {
               this.bs.toast(element.message, 3000, 'top');
             });
             break;

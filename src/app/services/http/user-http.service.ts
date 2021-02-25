@@ -31,8 +31,8 @@ export class UserHttpService {
     return this.http.post(this.url + 'singin', data, this.requestOptions).toPromise();
   }
 
-  public register(user: User, pass: Pass) {
-    return this.http.post(this.url + 'singup', { user, pass }, this.requestOptions).toPromise();
+  public register(data: User) { 
+    return this.http.post(this.url + 'singup', data, this.requestOptions).toPromise();
   }
 
   public updatePass(data: Pass) {

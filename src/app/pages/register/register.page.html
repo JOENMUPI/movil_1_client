@@ -3,12 +3,12 @@
     <ion-buttons slot="start">
       <ion-back-button  defaultHref="/login"></ion-back-button>
     </ion-buttons>
-    <ion-title>register</ion-title>
+    <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list lines="none" class="form" [ngClass]="{'fade-in': signupView, 'fade-out': !signupView}">
+  <ion-list class="opacity">
     <ion-item>
       <ion-label position="floating">Name</ion-label>
       <ion-input clearInput  type="text" #name></ion-input>
@@ -24,10 +24,11 @@
       <ion-input clearInput type="number" #age></ion-input>
       <ion-icon slot="end" name="hourglass-outline"></ion-icon>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">Gender</ion-label>
-      <ion-input clearInput type="text" #gender></ion-input>
-      <ion-icon slot="end" name="male-female-outline"></ion-icon>
+    <ion-item (click) = "bs.actionSheet('Genders', genderElements())">
+      <ion-label >Gender</ion-label>
+      <ion-label slot="end" color="primary">Push me!</ion-label>
+      <ion-label slot="end">{{resGender.description}}</ion-label>
+      <ion-icon slot="end" name="male-female-outline"></ion-icon> 
     </ion-item>
     <ion-item>
       <ion-label position="floating">Password</ion-label>
@@ -40,17 +41,7 @@
       <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
     </ion-item>
   </ion-list>  
-  <ion-button expand="full" shape="round" color="primary" (click) = "singin(email.value, pass.value)">Register</ion-button>
-  <ion-list>
-      <ion-item>
-        <ion-label >Gender</ion-label>
-        <ion-icon slot="end" name="male-female-outline"></ion-icon>
-      </ion-item>
-      <ion-item *ngFor="let gender of genders">
-        <ion-label>{{gender.description}}</ion-label>
-        <ion-checkbox slot="end" ></ion-checkbox>
-      </ion-item>
-  </ion-list>
-
-
+  <ion-button expand="full" shape="round" color="primary" (click) = "register(name.value, age.value, email.value, pass.value, pass2.value)">
+    Register
+  </ion-button>
 </ion-content>
