@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Menu Level: {{ level }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-nav-push>
+      <ion-item buttom [component]="nextPage" [componentProps]="{ level: level + 1 }">
+        <ion-icon name="arrow-forward" slot="end"></ion-icon>
+        <ion-label>
+          Go to level {{ level + 1}}
+        </ion-label>
+      </ion-item>
+    </ion-nav-push>
+
+    <ion-menu-toogle [autoHide]="false">
+      <ion-item [routerLink]="['/menu','details',level]">
+        <ion-icon name="exit" slot="end"></ion-icon>
+        <icon-label>
+          Open Content
+        </icon-label>
+      </ion-item>
+    </ion-menu-toogle>
+    <!-- <ion-nav-link router-direction="back" [component]="nextPage"[componentProps]="{level:0}"*ngIf="level>0">-->
+    <ion-nav-set-root [component]="nextPage" [componentProps]="{level:0}" *ngIf="level>0">
+      <ion-item button>
+        <ion-icon name="arrow-back" slot="end"></ion-icon>
+        <ion-label>
+          Go to root
+        </ion-label>
+      </ion-item>
+    </ion-nav-set-root>
+  </ion-list>
+</ion-content>

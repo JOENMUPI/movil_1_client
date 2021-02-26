@@ -6,9 +6,9 @@ const routes: Routes = [
     path: 'home',
     children: [
       {
-        path: '', 
-        loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
-      }, 
+        path: '',
+        loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
+      },
       //{ //asi pasas data por url mas elegante
       //  path: ':id',
       //  loadChildren: () => import('aqui das la nueva direccion.module').then( m => m.HomePageModule)//tambien se cambia la funcion
@@ -22,16 +22,26 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule),
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminPageModule),
   },
   {
     path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
+  {
+
+    path: 'menu',
+    loadChildren: () => import('./pages/menu/menu.module').then(m => m.MenuPageModule)
+  },  {
+    path: 'menu-list',
+    loadChildren: () => import('./pages/menu-list/menu-list.module').then( m => m.MenuListPageModule)
+  },
+
+
 ];
 
 @NgModule({
