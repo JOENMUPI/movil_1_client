@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastController, AlertController, LoadingController } from '@ionic/angular';
+import { ToastController, AlertController, LoadingController, ActionSheetController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user.model';
 
 
@@ -9,6 +9,7 @@ import { User } from 'src/app/interfaces/user.model';
 export class BasicService {
 
   constructor(
+    private actionSheetCtrl: ActionSheetController,
     private toastCtrl: ToastController, 
     private loadingCtrl: LoadingController, 
     private alertCtrl: AlertController
@@ -24,7 +25,7 @@ export class BasicService {
     sessionStorage.gender = data.gender;
   }
 
-  public checkField(fields: string[]) {
+  public checkField(fields: any[]) {
     let flag = true;
     
     fields.forEach(element => { 
@@ -35,31 +36,40 @@ export class BasicService {
 
     return flag
   }
+
+  public async actionSheet(header, buttons: any[]) {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header,
+      buttons
+    });
+    
+    await actionSheet.present();
+  }
   
-  public async loading(cont: string, dur: number) { 
+  public async loading(message: string, duration: number) { 
     const loading = await this.loadingCtrl.create({ 
-      message: cont, 
-      duration: dur 
+      message, 
+      duration 
     });
 
     await loading.present(); 
   }
   
-  public async toast(msg: string, dur: number, pos) { 
+  public async toast(message: string, duration: number, position) { 
     const toast = await this.toastCtrl.create({ 
-      message: msg, 
-      duration: dur, 
-      position: pos
+      message, 
+      duration, 
+      position
     });
     
     await toast.present();
   }
   
-  public async alert(tit: string, msg: string, buttons: any[]) {
+  public async alert(header: string, message: string, buttons: any[]) {
     const alert = await this.alertCtrl.create({ 
-      header: tit,
-      message: msg,
-      buttons: buttons
+      header,
+      message,
+      buttons
     });
 
     await alert.present();
