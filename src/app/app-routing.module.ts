@@ -36,10 +36,8 @@ const routes: Routes = [
 
     path: 'menu',
     loadChildren: () => import('./pages/menu/menu.module').then(m => m.MenuPageModule)
-  },  {
-    path: 'menu-list',
-    loadChildren: () => import('./pages/menu-list/menu-list.module').then( m => m.MenuListPageModule)
   },
+
 
 
 ];

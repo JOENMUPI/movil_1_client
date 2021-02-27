@@ -1,14 +1,37 @@
-<!--<ion-split-pane content-id="main">
-  <ion-menu>
-    <ion-nav [root]="rootPage"></ion-nav>
-  </ion-menu>
-  <ion-router-outlet id="main"></ion-router-outlet>
-</ion-split-pane>-->
-
-<ion-split-pane>
-  <ion-menu>
-    <ion-nav [root]="rootPage"></ion-nav>
-  </ion-menu>
-
-  <ion-router-outlet main></ion-router-outlet>
-</ion-split-pane>
+<ion-content>
+  <div *ngFor="let menu of menus" [routerLink]="['menu', menu.menu_id]">
+    <ion-card class="menu-card" button="true">
+      <ion-card-header>
+        <ion-card-subtitle> Menu </ion-card-subtitle>
+        <ion-card-title class="titles">{{menu.title_menu}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-icon name="chevron-forward-outline" class="card-icon"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary">
+      <ion-icon name="menu-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="light" (click)="goToProfile()">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" (click)="addNewMenu()">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <div class="drops">
+    <div class="drop drop-1"></div>
+    <div class="drop drop-2"></div>
+    <div class="drop drop-3"></div>
+    <div class="drop drop-4"></div>
+    <div class="drop drop-5"></div>
+    <div class="drop drop-6"></div>
+    <div class="drop drop-7"></div>
+    <div class="drop drop-8"></div>
+    <div class="drop drop-9"></div>
+  </div>
+</ion-content>

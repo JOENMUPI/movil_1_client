@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: MenuPage
+  },
+  {
+    path: 'menu-list',
+    loadChildren: () => import('./menu-list/menu-list.module').then( m => m.MenuListPageModule)
+  },
+  {
+    path: 'forms',
+    loadChildren: () => import('./forms/forms.module').then( m => m.FormsPageModule)
   }
 ];
 

@@ -8,26 +8,13 @@ import { MenuPageRoutingModule } from './menu-routing.module';
 
 import { MenuPage } from './menu.page';
 import { from } from 'rxjs';
-const routes: Routes = [
-  {
-    path: 'menu',
-    component: MenuPage,
-    children: [
-      { path: 'details/:level', loadChildren: () => import('../menu/menu-routing.module').then(m => m.MenuPageRoutingModule) }
-    ]
-  },
-  {
-    path: '',
-    redirectTo: '/menu/details/0',
-  }
-];
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
     MenuPageRoutingModule
   ],
   declarations: [MenuPage]
