@@ -2,8 +2,8 @@
   <div *ngFor="let menu of menus" [routerLink]="['menu', menu.menu_id]">
     <ion-card class="menu-card" button="true">
       <ion-card-header>
-        <ion-card-subtitle> Menu </ion-card-subtitle>
-        <ion-card-title class="titles">{{menu.title_menu}}</ion-card-title>
+        <ion-card-subtitle>Menu</ion-card-subtitle>
+        <ion-card-title class="titles">{{ menu.tittle }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-icon name="chevron-forward-outline" class="card-icon"></ion-icon>
@@ -15,12 +15,16 @@
       <ion-icon name="menu-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button color="light" (click)="goToProfile()">
+      <ion-fab-button color="light" href="/user">
         <ion-icon name="person-circle-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-button color="light" (click)="addNewMenu()">
         <ion-icon name="add-outline"></ion-icon>
       </ion-fab-button>
+      <ion-fab-button color="light" (click)="addNewMenu()">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-fab-button>
+      
     </ion-fab-list>
   </ion-fab>
   <div class="drops">

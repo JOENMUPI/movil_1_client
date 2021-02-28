@@ -15,6 +15,7 @@ export class RegisterPage implements OnInit {
   // Variables
   private genders = [ ];
   private resGender = { id: 0, description: '' }
+  private resAge = null;
 
   constructor(
     private bs: BasicService,
@@ -27,10 +28,11 @@ export class RegisterPage implements OnInit {
 
   // Life
   ngOnInit() {
-    
+
   }
 
   ionViewWillEnter() {
+    this.bs.loading('Loading...', 2000);
     this.getGenders();
   }
 
@@ -51,33 +53,46 @@ export class RegisterPage implements OnInit {
   }
 
   // Logic
-  public genderElements() {
-    let arr = [];
-    
-    this.genders.forEach(gender => {
-      arr.push({ 
-        text: gender.description,
-        handler: () => { this.resGender = gender; } 
-      });
-    });
-
-    return arr;
+  public buttonsAge() {
+    return [{
+      text: "Cancel",
+      role: 'cancel'
+    }, {
+      text:'Ok',
+      handler: (res: any) => { 
+        this.resAge = res.Age.value; 
+      }
+    }]
   }
 
-  public register(name: string, age: number, email: string, password: string, confirmPassword: string) {
-    if(!this.bs.checkField([ email, password, confirmPassword, name, age ]) || this.resGender.id <= 0) { 
+  public buttonsGender() {
+    return [{
+      text: "Cancel",
+      role: 'cancel'
+    }, {
+      text:'Ok',
+      handler: (res: any) => {  
+        this.resGender.description = res.Gender.text;
+        this.resGender.id = res.Gender.value; 
+      }
+    }]
+  }
+
+  public register(name: string, email: string, password: string, confirmPassword: string) {
+    if(!this.bs.checkField([ email, password, confirmPassword, name ]) || this.resGender.id <= 0) { 
       this.bs.alert('Fields', 'Please write on all fields', [{ text: 'Ok' }]);
 
     } else {
-      let data: User = { name, age, email, password, confirmPassword, gender: this.resGender.id, id: null };
+      let data: User = { name, email, password, confirmPassword, age: this.resAge, gender: this.resGender.id, id: null };
       
-      this.bs.loading('Loading', 5000);
-      this.uHttpS.register(data).then((res: Response) =>{
+      this.bs.loading('Loading...', 3000);
+      this.uHttpS.register(data).then((res: Response) => {
         switch(res.typeResponse) {
           case 'Success': 
+            this.bs.toast(res.message, 2000, 'top');  
             data.id = res.body.id;  
-            this.bs.toast(res.message, 2000, 'top');
-            this.bs.setUserOnSession(data); 
+            data.gender = this.resGender.description;
+            this.bs.setUserOnSession(data);  
             this.router.navigate(['/home']);  
             break;
 

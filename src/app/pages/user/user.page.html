@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button  defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>User</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="opacity">
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-label slot="end">{{ user.name }}</ion-label>
+      <ion-icon slot="start" name="person-outline"></ion-icon>
+      <ion-button shape="round" fill="outline" slot="end" color ="medium" (click) = "this.editName();">
+        <ion-icon name="create-outline" ></ion-icon >
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-label slot="end">{{ user.email }}</ion-label>
+      <ion-icon slot="start" name="at"></ion-icon>
+      <ion-button shape="round" fill="outline" slot="end" color ="medium" (click) = "this.editEmail();">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label>Age</ion-label>
+      <ion-label slot="end">{{ user.age }}</ion-label>
+      <ion-icon slot="start" name="hourglass-outline"></ion-icon>
+      <ion-button shape="round" fill="outline" slot="end" color ="medium" (click) = "this.bs.picker('Age', this.bs.getNums(3, 100), this.buttonsAge())">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label>Gender</ion-label>
+      <ion-label slot="end">{{ user.gender }}</ion-label>
+      <ion-icon slot="start" name="male-female-outline"></ion-icon> 
+      <ion-button shape="round" fill="outline" slot="end" color ="medium" (click) = "this.bs.picker('Gender', this.genders, this.buttonsGender())">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="full" shape="round" color="secondary" (click) = "this.editPass()">update pass</ion-button>
+  <ion-button expand="full" shape="round" color="primary" (click) = "this.sendDataUser()">
+    send edit
+  </ion-button>
+</ion-content>

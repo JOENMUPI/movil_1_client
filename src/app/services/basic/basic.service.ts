@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ToastController, AlertController, LoadingController, ActionSheetController } from '@ionic/angular';
+import { 
+  ToastController, 
+  ModalController, 
+  AlertController, 
+  LoadingController, 
+  PickerController, 
+  ActionSheetController 
+} from '@ionic/angular';
 import { User } from 'src/app/interfaces/user.model';
 
 
@@ -12,17 +19,43 @@ export class BasicService {
     private actionSheetCtrl: ActionSheetController,
     private toastCtrl: ToastController, 
     private loadingCtrl: LoadingController, 
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private pikerCtrl: PickerController,
+    private modalCtrl: ModalController
   ) {
 
   }
 
-  public setUserOnSession(data: User) {
+  public setUserOnSession(data: User) { 
     sessionStorage.name = data.name
     sessionStorage.email = data.email;
     sessionStorage.id = data.id;
     sessionStorage.age = data.age;
     sessionStorage.gender = data.gender;
+  }
+
+  public getUserOnSession() {
+    return {
+      name: sessionStorage.name,
+      email: sessionStorage.email,
+      id: sessionStorage.id,
+      age: sessionStorage.age,
+      gender: sessionStorage.gender,
+      password: null,
+      confirmPassword: null
+    } 
+  }
+
+
+
+  public getNums(min, max) {
+    const arr = [];
+    
+    for(let i = min; i <= max; i++) {
+      arr.push({ description: i, id: i });
+    }
+
+    return arr;
   }
 
   public checkField(fields: any[]) {
@@ -35,6 +68,30 @@ export class BasicService {
     });
 
     return flag
+  }
+
+  public async modal(component) {
+    const modal = await this.modalCtrl.create({  
+      component  
+    });
+
+    await modal.present();
+  }
+
+  public async picker(name , colum, buttons) {
+    const aux = [];
+
+    colum.forEach(element => { 
+      aux.push({ text: element.description, value: element.id });
+    });
+
+    const piker = await this.pikerCtrl.create({ 
+      columns: [{ name, options: aux }],
+      buttons,
+      
+    });
+
+    await piker .present();
   }
 
   public async actionSheet(header, buttons: any[]) {
@@ -69,6 +126,17 @@ export class BasicService {
     const alert = await this.alertCtrl.create({ 
       header,
       message,
+      buttons
+    });
+
+    await alert.present();
+  }
+
+  public async alertWithInputs(header: string, message: string, inputs: any[],  buttons: any[]) {
+    const alert = await this.alertCtrl.create({ 
+      header,
+      message,
+      inputs,
       buttons
     });
 

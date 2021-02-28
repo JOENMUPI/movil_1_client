@@ -8,10 +8,10 @@ export class GenderHttpService {
   private url = 'http://localhost:8000/gender/';
   private urlx = 'https://server-movil-1.herokuapp.com/gender/';
   private requestOptions = { headers: { 'Content-Type': 'application/json' } }
-
+  
   constructor(
     private http: HttpClient
-  ) {
+  ) { 
 
   }
 

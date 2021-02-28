@@ -35,15 +35,15 @@ export class UserHttpService {
     return this.http.post(this.url + 'singup', data, this.requestOptions).toPromise();
   }
 
-  public updatePass(data: Pass) {
-    return this.http.put(this.url + `pass/${ sessionStorage.user.id }`, data, this.requestOptions).toPromise();
+  public updatePass(data: Pass) { 
+    return this.http.put(this.url + 'pass/' + sessionStorage.id, data, this.requestOptions).toPromise();
   }
   
   public updateUser(data: User) {
-    return this.http.put(this.url + sessionStorage.user.id, data, this.requestOptions).toPromise;
+    return this.http.put(this.url + sessionStorage.id, data, this.requestOptions).toPromise();
   }
 
   public deleteUser(id: string) {
-    return this.http.delete(this.url + id, this.requestOptions).toPromise;
+    return this.http.delete(this.url + id, this.requestOptions).toPromise();
   } 
 }

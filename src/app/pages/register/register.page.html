@@ -13,21 +13,22 @@
       <ion-label position="floating">Name</ion-label>
       <ion-input clearInput  type="text" #name></ion-input>
       <ion-icon slot="end" name="person-outline"></ion-icon>
-    </ion-item>
+    </ion-item> 
     <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input clearInput type="email" #email></ion-input>
       <ion-icon slot="end" name="at"></ion-icon>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">Age</ion-label>
-      <ion-input clearInput type="number" #age></ion-input>
+    <ion-item (click) = "this.bs.picker('Age', this.bs.getNums(3, 100), buttonsAge())">
+      <ion-label >Age</ion-label>
+      <ion-label slot="end" color="primary">Push me!</ion-label>
+      <ion-label slot="end">{{ resAge }}</ion-label>
       <ion-icon slot="end" name="hourglass-outline"></ion-icon>
     </ion-item>
-    <ion-item (click) = "bs.actionSheet('Genders', genderElements())">
+    <ion-item (click) ="this.bs.picker('Gender', this.genders, buttonsGender())">
       <ion-label >Gender</ion-label>
       <ion-label slot="end" color="primary">Push me!</ion-label>
-      <ion-label slot="end">{{resGender.description}}</ion-label>
+      <ion-label slot="end">{{ resGender.description }}</ion-label>
       <ion-icon slot="end" name="male-female-outline"></ion-icon> 
     </ion-item>
     <ion-item>
@@ -41,7 +42,7 @@
       <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
     </ion-item>
   </ion-list>  
-  <ion-button expand="full" shape="round" color="primary" (click) = "register(name.value, age.value, email.value, pass.value, pass2.value)">
+  <ion-button expand="full" shape="round" color="primary" (click) = "register(name.value, email.value, pass.value, pass2.value)">
     Register
   </ion-button>
 </ion-content>

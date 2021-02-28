@@ -56,7 +56,7 @@ export class LoginPage implements OnInit {
         switch(res.typeResponse) {
           case 'Success': 
             this.bs.toast(res.message, 2000, 'top');
-            this.bs.setUserOnSession(res.body);
+            this.bs.setUserOnSession(res.body[0]);
             this.router.navigate(['/home']);  
             break;
 
