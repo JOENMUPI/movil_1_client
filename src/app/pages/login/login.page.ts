@@ -24,7 +24,7 @@ export class LoginPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    
+    this.bs.nullUserOnSession();
   }
 
   ionViewDidEnter() {
@@ -43,6 +43,7 @@ export class LoginPage implements OnInit {
     
   }
 
+  
   // Logic
   public singin(email: string, password: string) { 
     if(!this.bs.checkField([ email, password ])) { 
@@ -57,7 +58,7 @@ export class LoginPage implements OnInit {
           case 'Success': 
             this.bs.toast(res.message, 2000, 'top');
             this.bs.setUserOnSession(res.body[0]);
-            this.router.navigate(['/home']);  
+            this.router.navigate(['/menu']);  
             break;
 
           case 'Fail':

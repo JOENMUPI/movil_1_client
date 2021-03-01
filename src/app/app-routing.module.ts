@@ -8,11 +8,7 @@ const routes: Routes = [
       {
         path: '', 
         loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
-      }, 
-      //{ //asi pasas data por url mas elegante
-      //  path: ':id',
-      //  loadChildren: () => import('aqui das la nueva direccion.module').then( m => m.HomePageModule)//tambien se cambia la funcion
-      //}
+      }
     ],
   },
   {

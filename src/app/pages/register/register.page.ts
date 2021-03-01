@@ -33,6 +33,7 @@ export class RegisterPage implements OnInit {
 
   ionViewWillEnter() {
     this.bs.loading('Loading...', 2000);
+    this.bs.nullUserOnSession();
     this.getGenders();
   }
 
@@ -93,7 +94,7 @@ export class RegisterPage implements OnInit {
             data.id = res.body.id;  
             data.gender = this.resGender.description;
             this.bs.setUserOnSession(data);  
-            this.router.navigate(['/home']);  
+            this.router.navigate(['/menu']);  
             break;
 
           case 'Fail':

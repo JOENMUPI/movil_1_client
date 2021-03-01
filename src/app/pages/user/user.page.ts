@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Response } from 'src/app/interfaces/response.model';
 import { User } from 'src/app/interfaces/user.model';
 import { Pass } from '../../interfaces/pass.model'
@@ -20,7 +19,6 @@ export class UserPage implements OnInit {
   
   constructor(
     private bs: BasicService,
-    private router: Router,
     private gHttpS: GenderHttpService,
     private uHttpS: UserHttpService
   ) {

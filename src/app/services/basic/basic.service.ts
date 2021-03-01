@@ -34,6 +34,14 @@ export class BasicService {
     sessionStorage.gender = data.gender;
   }
 
+  public nullUserOnSession() { 
+    sessionStorage.name = null;
+    sessionStorage.email = null;
+    sessionStorage.id = null;
+    sessionStorage.age = null;
+    sessionStorage.gender = null;
+  }
+
   public getUserOnSession() {
     return {
       name: sessionStorage.name,

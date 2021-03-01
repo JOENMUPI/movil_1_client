@@ -17,7 +17,15 @@ export class MenuHttpService {
     return this.http.get(this.url, this.requestOptions).toPromise();
   }
 
-  public getMenusById(data) {
-    return this.http.get(this.url + 'rec/' + data, this.requestOptions).toPromise();
+  public getMenusById(data) {  
+    return this.http.get(this.url + data, this.requestOptions).toPromise();
+  }
+
+  public newMenu(data) { 
+    return this.http.post(this.url, data, this.requestOptions).toPromise();
+  }
+
+  public deleteMenu(menuId) {
+    return this.http.delete(this.url + `${ sessionStorage.id }/${ menuId }`).toPromise();
   }
 }

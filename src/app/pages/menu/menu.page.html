@@ -1,15 +1,24 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Menu</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <div *ngFor="let menu of menus" [routerLink]="['menu', menu.menu_id]">
-    <ion-card class="menu-card" button="true">
-      <ion-card-header>
-        <ion-card-subtitle>Menu</ion-card-subtitle>
+  <ion-list>
+    <ion-card button="true" *ngFor="let menu of menus" >
+      <ion-item *ngIf ="flag">
+        <ion-button  slot="end" shape="round" fill="outline" color ="medium" (click)="deleteMenu(menu)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-card-content [routerLink]="[ menu.id ]">
         <ion-card-title class="titles">{{ menu.tittle }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
         <ion-icon name="chevron-forward-outline" class="card-icon"></ion-icon>
       </ion-card-content>
     </ion-card>
-  </div>
+  </ion-list>
+  
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="primary">
       <ion-icon name="menu-outline"></ion-icon>
@@ -18,24 +27,12 @@
       <ion-fab-button color="light" href="/user">
         <ion-icon name="person-circle-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="light" (click)="addNewMenu()">
+      <ion-fab-button color="light" (click)="newMenu()" *ngIf ="flag">
         <ion-icon name="add-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="light" (click)="addNewMenu()">
-        <ion-icon name="create-outline"></ion-icon>
+      <ion-fab-button color="light" href="/login">
+        <ion-icon name="log-out-outline"></ion-icon>
       </ion-fab-button>
-      
     </ion-fab-list>
   </ion-fab>
-  <div class="drops">
-    <div class="drop drop-1"></div>
-    <div class="drop drop-2"></div>
-    <div class="drop drop-3"></div>
-    <div class="drop drop-4"></div>
-    <div class="drop drop-5"></div>
-    <div class="drop drop-6"></div>
-    <div class="drop drop-7"></div>
-    <div class="drop drop-8"></div>
-    <div class="drop drop-9"></div>
-  </div>
 </ion-content>
