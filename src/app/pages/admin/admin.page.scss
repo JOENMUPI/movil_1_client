@@ -1,0 +1,109 @@
+$black: rgba(255, 255, 255, 0.3);
+$white: rgba(255, 255, 255, 0.9);
+
+ion-content {
+  --ion-background-color: linear-gradient(45deg, #b9b4b5, #35414b);
+}
+
+ion-menu{
+    ion-toolbar{
+    --ion-color-tertiary: #35414b;
+    --ion-color-tertiary-contrast: white;
+    }
+}
+
+
+ion-label{
+    --ion-background-color: linear-gradient(45deg, #b9b4b5, #35414b);
+}
+h3 {
+  color: blue;
+  font-size: medium;
+}
+
+.card-icon {
+  color: blue;
+  position: relative;
+  left: 350px;
+}
+
+.drop {
+  background: $white;
+  backdrop-filter: blur(3px);
+  border-radius: 10px;
+  border-left: 1px solid $white;
+  border-top: 1px solid $white;
+  box-shadow: 10px 10px 60px -8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+
+  &-1 {
+    height: 80px;
+    width: 80px;
+    top: 140px;
+    left: 10px;
+    z-index: 1;
+  }
+
+  &-2 {
+    height: 80px;
+    width: 80px;
+    bottom: 75px;
+    left: 20px;
+  }
+
+  &-3 {
+    height: 100px;
+    width: 100px;
+    bottom: 70px;
+    right: 20px;
+    z-index: -1;
+  }
+
+  &-4 {
+    height: 120px;
+    width: 120px;
+    top: 40px;
+    right: 5px;
+    z-index: -1;
+  }
+
+  &-5 {
+    height: 60px;
+    width: 60px;
+    top: 70px;
+    right: 35px;
+    z-index: 1;
+  }
+
+  &-6 {
+    height: 60px;
+    width: 60px;
+    top: 320px;
+    right: 295px;
+    z-index: 1;
+  }
+
+  &-7 {
+    height: 90px;
+    width: 90px;
+    top: 500px;
+    right: 205px;
+    z-index: 1;
+  }
+
+  &-8 {
+    height: 130px;
+    width: 130px;
+    top: 260px;
+    right: 35px;
+    z-index: 1;
+  }
+
+  &-9 {
+    height: 90px;
+    width: 90px;
+    top: 240px;
+    right: 15px;
+    z-index: 1;
+  }
+}
