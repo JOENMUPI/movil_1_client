@@ -17,10 +17,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'admin',
-    loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule),
-  },
-  {
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
@@ -47,6 +43,10 @@ const routes: Routes = [
   {
     path: 'new-form',
     loadChildren: () => import('./pages/new-form/new-form.module').then( m => m.NewFormPageModule)
+  },
+  {
+    path: 'data-form',
+    loadChildren: () => import('./pages/data-form/data-form.module').then( m => m.DataFormPageModule)
   },
 ];
 

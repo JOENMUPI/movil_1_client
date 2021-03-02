@@ -135,7 +135,7 @@ export class NewFormPage implements OnInit {
     );
   }
 
-  public newQuestion(section) {
+  public newQuestion(section: Section) {
     this.bs.alertWithInputs(
       'New question', 
       'Write a new question',
@@ -149,10 +149,12 @@ export class NewFormPage implements OnInit {
       }, { 
         text: 'Ready', 
         handler: (res) => {   
+          let inputs: Input[] = [{ message: 'Response:', id: null, response: null }]
+
           if(this.bs.checkField([ res.question ])) {
             (section.questions != null) 
-            ? section.questions.push({ tittle: res.question, type: 'Text', obligatory: true, inputs: null }) 
-            : section.questions = [{ tittle: res.question, type: 'Text', obligatory: true, inputs: null }];
+            ? section.questions.push({ tittle: res.question, type: 'Text', obligatory: true, inputs }) 
+            : section.questions = [{ tittle: res.question, type: 'Text', obligatory: true, inputs }];
           
           } else {
             this.bs.toast('Empty field', 2000, 'top');
@@ -282,7 +284,11 @@ export class NewFormPage implements OnInit {
         role: 'cancel'
       }, { 
         text: 'Ready', 
-        handler: (res) => { 
+        handler: (res) => {   
+          if(res.TypeInputs.text == 'Text') { 
+            question.inputs = [{ message: 'Response:', id: null, response: null }];
+          }
+
           question.type = res.TypeInputs.text; 
         }
       }] 

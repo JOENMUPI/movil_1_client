@@ -59,41 +59,65 @@ export class FormPage implements OnInit {
 
 
   // Logic
+  public go() {
+    this.router.navigate([ '/data-form/' + this.ruteActivated.snapshot.params.formId ])
+  }
+
   public addResponse(input: Input, question: Question) {
     switch(question.type) {
       case 'Text':
         this.bs.alertWithInputs(
           'Response', 
-          input.message, 
+          'Write a response', 
           [{ 
             name: 'data',
             type: 'textarea',
-            placeholder: 'response'
+            placeholder: question.inputs[0].message
           }], [{
             text: "Cancel",
             role: 'cancel'
           }, { 
             text: 'Ready', 
             handler: (res) => {   
-              if (this.bs.checkField([ res.data ])) { 
-                if(this.responses.length > 0) {
-                  if(this.responses.find(i => i.inputId == input.id)) {
-                    this.responses = this.responses.filter(i => i.inputId != input.id);
-                  } 
-                } 
-    
-              } else {   
-                this.bs.toast('Empty field', 2000, 'top');
-              } 
-    
-              input.response = res.data; 
-              this.responses.push({ inputId: input.id, data: { response: res.data } }); 
+              (this.bs.checkField([ res.data ])) 
+              ? this.checkArrResponses(question.inputs[0]) 
+              : this.bs.toast('Empty field', 2000, 'top');
+               
+              question.inputs[0].response = res.data; 
+              this.responses.push({ inputId: question.inputs[0].id, data: { response: res.data } }); 
             }
           }]
         );
         break;
 
-      case 'List':
+      case 'MultipleChoice': 
+        if(this.responses.length > 0) {
+          if(this.responses.find(i => i.inputId == input.id)) {
+            this.responses = this.responses.filter(i => i.inputId != input.id);
+          }
+
+          question.inputs.forEach(e => {
+            if(e.id == input.id) {
+              this.responses.push({ inputId: e.id, data: { response: input.response } }); 
+            }
+          });
+
+        } else {
+          question.inputs.forEach(e => {
+            (e.id == input.id) 
+            ? this.responses.push({ inputId: e.id, data: { response: input.response } })
+            : this.responses.push({ inputId: e.id, data: { response: false } }); 
+          });
+        } 
+        break;
+
+      case 'Hour':
+      case 'Date': 
+        this.checkArrResponses(input);
+        this.responses.push({ inputId: input.id, data: { response: input.response } }); 
+        break;
+
+      case 'List': 
         let aux = [];
 
         question.inputs.forEach(inp => {
@@ -109,31 +133,25 @@ export class FormPage implements OnInit {
           }, {
             text: 'Select', 
             handler: (res) => { 
-              question.inputs.forEach(e => {
-                if(this.responses.length > 0) {
-                  if(this.responses.find(i => i.inputId == e.id)) {
-                    this.responses = this.responses.filter(i => i.inputId != e.id);
-                  }
-                }
+              question.inputs[0].response = res.Data.text 
+              question.inputs.forEach((e) => {
+                this.checkArrResponses(e);
 
-                (e.id == input.id) 
+                (e.id == res.Data.value) 
                 ? this.responses.push({ inputId: e.id, data: { response: true } })
                 : this.responses.push({ inputId: e.id, data: { response: false } }); 
-              }); 
+              });  
             }
           }]);
         break;
+    }
+  }
 
-      case 'MultipleChoice':
-        input.response = !input.response;
-        if(this.responses.length > 0) {
-          if(this.responses.find(i => i.inputId == input.id)) {
-            this.responses = this.responses.filter(i => i.inputId != input.id);
-          } 
-        }
-
-        this.responses.push({ inputId: input.id, data: { response: input.response } }); 
-        break;
+  private checkArrResponses(input: Input) {
+    if(this.responses.length > 0) {
+      if(this.responses.find(i => i.inputId == input.id)) {
+        this.responses = this.responses.filter(i => i.inputId != input.id);
+      } 
     }
   }
 

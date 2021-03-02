@@ -19,18 +19,26 @@
       <ion-card-header>
         <ion-card-title>{{ question.tittle }}</ion-card-title>
       </ion-card-header>
-      
+      <ion-item button="true" (click)="addResponse(null, question)" *ngIf ="(question.type == 'List')">
+        <ion-label>PUSH ME</ion-label>
+        <ion-label>{{ question.inputs[0].response }}</ion-label>
+      </ion-item>
+      <ion-item button="true" (click)="addResponse(null, question)" *ngIf ="(question.type == 'Text')">
+        <ion-label>{{ question.inputs[0].message }}</ion-label>
+        <ion-label>{{ question.inputs[0].response }}</ion-label>
+      </ion-item>
       <ion-item-group *ngFor="let input of question.inputs">
-        <ion-item button="true" (click)="addResponse(input, question)" *ngIf ="(question.type == 'Text')">
+        <ion-item *ngIf="(question.type == 'MultipleChoice')">
           <ion-label>{{ input.message }}</ion-label>
-          <ion-label>{{ input.response }}</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="input.response" (ionChange)="addResponse(input, question)"></ion-checkbox>
         </ion-item>
-        <ion-item button="true" (click)="addResponse(input, question)" *ngIf ="(question.type == 'List')">
-          <ion-label>PUSH ME</ion-label>
-        </ion-item>
-        <ion-item button="true" (click)="addResponse(input, question)" *ngIf="(question.type == 'MultipleChoice')">
+        <ion-item *ngIf="(question.type == 'Hour')">
           <ion-label>{{ input.message }}</ion-label>
-          <ion-checkbox slot="start" [(ngModel)]="input.response"></ion-checkbox>
+          <ion-datetime displayFormat="HH:mm" [(ngModel)]="input.response" (ionChange)="addResponse(input, question)"></ion-datetime>
+        </ion-item>
+        <ion-item *ngIf="(question.type == 'Date')">
+          <ion-label>{{ input.message }}</ion-label>
+          <ion-datetime displayFormat="DD/MMM/YYYY" [(ngModel)]="input.response" (ionChange)="addResponse(input, question)"></ion-datetime>
         </ion-item>
       </ion-item-group> 
      </ion-card>
@@ -46,6 +54,9 @@
       </ion-fab-button>
       <ion-fab-button color="light" (click)="deleteForm()" *ngIf ="flag">
         <ion-icon name="trash-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" (click)="go()" *ngIf ="flag">
+        <ion-icon name="stats-chart-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-button color="light" href="/login">
         <ion-icon name="log-out-outline"></ion-icon>
