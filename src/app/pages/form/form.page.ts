@@ -7,6 +7,8 @@ import { BasicService } from '../../services/basic/basic.service';
 import { Form } from 'src/app/interfaces/form.model';
 import { Response } from 'src/app/interfaces/response.model';
 import { Input } from 'src/app/interfaces/input.model';
+import { Question } from 'src/app/interfaces/question.model';
+
 
 @Component({
   selector: 'app-form',
@@ -57,36 +59,82 @@ export class FormPage implements OnInit {
 
 
   // Logic
-  public addResponse(input: Input) {
-    this.bs.alertWithInputs(
-      'Response', 
-      input.message, 
-      [{ 
-        name: 'data',
-        type: 'textarea',
-        placeholder: 'response'
-      }], [{
-        text: "Cancel",
-        role: 'cancel'
-      }, { 
-        text: 'Ready', 
-        handler: (res) => {   
-          if (this.bs.checkField([ res.data ])) { 
-            if(this.responses.length > 0) {
-              if(this.responses.find(i => i.inputId == input.id)) {
-                this.responses = this.responses.filter(i => i.inputId != input.id);
+  public addResponse(input: Input, question: Question) {
+    switch(question.type) {
+      case 'Text':
+        this.bs.alertWithInputs(
+          'Response', 
+          input.message, 
+          [{ 
+            name: 'data',
+            type: 'textarea',
+            placeholder: 'response'
+          }], [{
+            text: "Cancel",
+            role: 'cancel'
+          }, { 
+            text: 'Ready', 
+            handler: (res) => {   
+              if (this.bs.checkField([ res.data ])) { 
+                if(this.responses.length > 0) {
+                  if(this.responses.find(i => i.inputId == input.id)) {
+                    this.responses = this.responses.filter(i => i.inputId != input.id);
+                  } 
+                } 
+    
+              } else {   
+                this.bs.toast('Empty field', 2000, 'top');
               } 
-            } 
+    
+              input.response = res.data; 
+              this.responses.push({ inputId: input.id, data: { response: res.data } }); 
+            }
+          }]
+        );
+        break;
 
-          } else {   
-            this.bs.toast('Empty field', 2000, 'top');
+      case 'List':
+        let aux = [];
+
+        question.inputs.forEach(inp => {
+          aux.push({ description: inp.message, id: inp.id });
+        });
+        
+        this.bs.picker(
+          'Data',
+          aux,
+          [{
+            text: "Cancel",
+            role: 'cancel'
+          }, {
+            text: 'Select', 
+            handler: (res) => { 
+              question.inputs.forEach(e => {
+                if(this.responses.length > 0) {
+                  if(this.responses.find(i => i.inputId == e.id)) {
+                    this.responses = this.responses.filter(i => i.inputId != e.id);
+                  }
+                }
+
+                (e.id == input.id) 
+                ? this.responses.push({ inputId: e.id, data: { response: true } })
+                : this.responses.push({ inputId: e.id, data: { response: false } }); 
+              }); 
+            }
+          }]);
+        break;
+
+      case 'MultipleChoice':
+        input.response = !input.response;
+        if(this.responses.length > 0) {
+          if(this.responses.find(i => i.inputId == input.id)) {
+            this.responses = this.responses.filter(i => i.inputId != input.id);
           } 
-
-          input.response = res.data; 
-          this.responses.push({ inputId: input.id, data: { response: res.data } }); 
         }
-      }]
-    );
+
+        this.responses.push({ inputId: input.id, data: { response: input.response } }); 
+        break;
+    }
   }
 
   public deleteForm() {

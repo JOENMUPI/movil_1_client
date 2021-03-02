@@ -19,10 +19,20 @@
       <ion-card-header>
         <ion-card-title>{{ question.tittle }}</ion-card-title>
       </ion-card-header>
-      <ion-item button="true" *ngFor="let input of question.inputs" (click)="addResponse(input)">
-        <ion-label>{{ input.message }}</ion-label>
-        <ion-label>{{ input.response }}</ion-label>
-      </ion-item>
+      
+      <ion-item-group *ngFor="let input of question.inputs">
+        <ion-item button="true" (click)="addResponse(input, question)" *ngIf ="(question.type == 'Text')">
+          <ion-label>{{ input.message }}</ion-label>
+          <ion-label>{{ input.response }}</ion-label>
+        </ion-item>
+        <ion-item button="true" (click)="addResponse(input, question)" *ngIf ="(question.type == 'List')">
+          <ion-label>PUSH ME</ion-label>
+        </ion-item>
+        <ion-item button="true" (click)="addResponse(input, question)" *ngIf="(question.type == 'MultipleChoice')">
+          <ion-label>{{ input.message }}</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="input.response"></ion-checkbox>
+        </ion-item>
+      </ion-item-group> 
      </ion-card>
   </ion-card>
 

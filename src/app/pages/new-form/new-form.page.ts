@@ -9,6 +9,7 @@ import { Section } from 'src/app/interfaces/section.model';
 import { Input } from 'src/app/interfaces/input.model';
 import { Question } from 'src/app/interfaces/question.model';
 
+
 @Component({
   selector: 'app-new-form',
   templateUrl: './new-form.page.html',
@@ -56,10 +57,6 @@ export class NewFormPage implements OnInit {
   }
 
   // Logic
-  public back() { 
-    this.router.navigate([ '/menu/' + this.ruteActivated.snapshot.params.menuParentId ]);
-  }
-
   public newSection() {
     this.bs.alertWithInputs(
       'New Section', 
@@ -154,8 +151,8 @@ export class NewFormPage implements OnInit {
         handler: (res) => {   
           if(this.bs.checkField([ res.question ])) {
             (section.questions != null) 
-            ? section.questions.push({ tittle: res.question, obligatory: true, inputs: null }) 
-            : section.questions = [{ tittle: res.question, obligatory: true, inputs: null }];
+            ? section.questions.push({ tittle: res.question, type: 'Text', obligatory: true, inputs: null }) 
+            : section.questions = [{ tittle: res.question, type: 'Text', obligatory: true, inputs: null }];
           
           } else {
             this.bs.toast('Empty field', 2000, 'top');
@@ -223,8 +220,8 @@ export class NewFormPage implements OnInit {
         handler: (res) => { 
           if(this.bs.checkField([ res.tittle ])) { 
             (question.inputs != null)
-            ? question.inputs.push({ message: res.tittle, type: 'Text', id: null, response: null }) 
-            : question.inputs = [{ message: res.tittle, type: 'Text', id: null, response: null }];   
+            ? question.inputs.push({ message: res.tittle, id: null, response: null }) 
+            : question.inputs = [{ message: res.tittle, id: null, response: null }];   
           
           } else {
             this.bs.toast('Empty field', 2000, 'top');
@@ -276,7 +273,7 @@ export class NewFormPage implements OnInit {
     );
   }
 
-  public editTypeInput(input: Input) {
+  public editQuestionType(question: Question) { 
     this.bs.picker(
       'TypeInputs', 
       this.typeInput,
@@ -286,7 +283,7 @@ export class NewFormPage implements OnInit {
       }, { 
         text: 'Ready', 
         handler: (res) => { 
-          input.type = res.TypeInputs.value; 
+          question.type = res.TypeInputs.text; 
         }
       }] 
     );
@@ -297,7 +294,7 @@ export class NewFormPage implements OnInit {
       switch(res.typeResponse) {
         case 'Success': 
           this.bs.toast(res.message, 2000, 'top');
-          this.typeInput = res.body;
+          this.typeInput = res.body; 
           break;
 
         case 'Fail':
