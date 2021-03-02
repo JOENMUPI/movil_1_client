@@ -1,4 +1,6 @@
 export interface Input {
+    id: number | null,
     message: string,
-    type: 'check'|'text'|'textArea'|'multipleChoice'
+    type: 'Check'|'Text'|'TextArea'|'MultipleChoice',
+    response: any
 }

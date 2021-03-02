@@ -54,8 +54,6 @@ export class BasicService {
     } 
   }
 
-
-
   public getNums(min, max) {
     const arr = [];
     

@@ -2,7 +2,7 @@
   <ion-toolbar color="tertiary">
     <ion-title>{{ parent.tittle }}</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button (click)="back()"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -15,7 +15,7 @@
           <ion-icon name="trash-outline"></ion-icon>
         </ion-button>
       </ion-item>
-      <ion-card-content (click)="go(menu.id)">
+      <ion-card-content (click)="router.navigate([ '/menu/' + menu.id ])">
         <ion-card-title class="titles">{{ menu.tittle }}</ion-card-title>
         <ion-icon name="chevron-forward-outline" class="card-icon"></ion-icon>
       </ion-card-content>
@@ -33,7 +33,7 @@
       <ion-fab-button color="light" (click)="newMenu()" *ngIf ="flag">
         <ion-icon name="add-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="light" href="/new-form" *ngIf ="(flag && menuFlag)">
+      <ion-fab-button color="light" (click)="router.navigate([ '/new-form/' + this.parent.id ])" *ngIf ="(flag && menuFlag)">
         <ion-icon name="create-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-button color="light" href="/login">

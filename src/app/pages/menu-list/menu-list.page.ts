@@ -23,8 +23,8 @@ export class MenuListPage implements OnInit {
     private fHttpS: FormHttpService,
     private rHttpS: RoleHttpService,
     private mHttpS: MenuHttpService,
-    private ruteActivated: ActivatedRoute,
     private bs: BasicService,
+    private ruteActivated: ActivatedRoute,
     private router: Router
   ) { 
 
@@ -57,16 +57,6 @@ export class MenuListPage implements OnInit {
   }
 
   // Logic
-  public back() { 
-    (this.parent.id > 0 && this.parent.parent != null) 
-    ? this.router.navigate([ '/menu/' + this.parent.parent ])
-    : this.router.navigate([ '/menu' ]);
-  }
-
-  public go(id) { 
-    this.router.navigate([ '/menu/' + id ]);
-  }
-
   public newMenu() {
     this.bs.alertWithInputs(
       'New menu',
@@ -130,7 +120,7 @@ export class MenuListPage implements OnInit {
   public checkForm() {
     this.fHttpS.checkFormByMenu(this.parent.id).then((res: Response) => {
       switch(res.typeResponse) {
-        case 'Success': console.log('responss:', res);
+        case 'Success': 
           this.bs.toast(res.message, 2000, 'top');  
           if(res.body != null) {  
             this.router.navigate([ '/form/' + res.body.id ]); 
