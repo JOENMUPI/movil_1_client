@@ -9,8 +9,8 @@ import { LoginUser } from 'src/app/interfaces/login-user.model';
   providedIn: 'root'
 })
 export class UserHttpService {
-  private url = 'http://localhost:8000/user/';
-  private urlx = 'https://server-movil-1.herokuapp.com/user/';
+  private urlx = 'http://localhost:8000/user/';
+  private url = 'https://server-movil-1.herokuapp.com/user/';
   private requestOptions = { headers: { 'Content-Type': 'application/json' } }
 
   constructor(

@@ -6,8 +6,8 @@ import { Form } from 'src/app/interfaces/form.model';
   providedIn: 'root'
 })
 export class FormHttpService {
-  private url = 'http://localhost:8000/form/';
-  private urlx = 'https://server-movil-1.herokuapp.com/form/';
+  private urlx = 'http://localhost:8000/form/';
+  private url = 'https://server-movil-1.herokuapp.com/form/';
   private requestOptions = { headers: { 'Content-Type': 'application/json' } }
 
   constructor(

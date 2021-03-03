@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ResponseHttpService {
-  private url = 'http://localhost:8000/response/';
-  private urlx = 'https://server-movil-1.herokuapp.com/response/';
+  private urlx = 'http://localhost:8000/response/';
+  private url = 'https://server-movil-1.herokuapp.com/response/';
   private requestOptions = { headers: { 'Content-Type': 'application/json' } }
 
   constructor(

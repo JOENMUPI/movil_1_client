@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class MenuHttpService {
-  private url = 'http://localhost:8000/menu/';
-  private urlx = 'https://server-movil-1.herokuapp.com/menu/';
+  private urlx = 'http://localhost:8000/menu/';
+  private url = 'https://server-movil-1.herokuapp.com/menu/';
   private requestOptions = { headers: { 'Content-Type': 'application/json' } }
 
   constructor(

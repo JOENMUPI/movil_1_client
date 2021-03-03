@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class GenderHttpService {
-  private url = 'http://localhost:8000/gender/';
-  private urlx = 'https://server-movil-1.herokuapp.com/gender/';
+  private urlx = 'http://localhost:8000/gender/';
+  private url = 'https://server-movil-1.herokuapp.com/gender/';
   private requestOptions = { headers: { 'Content-Type': 'application/json' } }
   
   constructor(
