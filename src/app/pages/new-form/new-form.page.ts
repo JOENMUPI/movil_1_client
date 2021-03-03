@@ -76,9 +76,14 @@ export class NewFormPage implements OnInit {
         text: 'Ready', 
         handler: (res) => {   
           if (this.bs.checkField([ res.tittle, res.description ])) {
-            (this.form.sections != null) 
-            ? this.form.sections.push({ tittle: res.tittle, message: res.description, questions: null }) 
-            : this.form.sections = [{ tittle:res.tittle, message: res.description, questions: null }];
+            if (this.form.sections != null) {
+              (!this.form.sections.find(i => i.tittle == res.tittle))
+              ?this.form.sections.push({ tittle: res.tittle, message: res.description, questions: null })
+              : this.bs.toast('Repeated section name', 2000, 'top');
+
+            } else {
+              this.form.sections = [{ tittle:res.tittle, message: res.description, questions: null }];
+            }
           
           } else {   
             this.bs.toast('Empty field', 2000, 'top');
@@ -107,10 +112,14 @@ export class NewFormPage implements OnInit {
         text: 'Ready', 
         handler: (res) => {   
           if (this.bs.checkField([ res.tittle, res.description ])) {
-            section.tittle = res.tittle;
-            section.message = res.description;
-            this.bs.toast('Edit section successfully', 2000, 'top');
+            if(this.form.sections.find(i => (i.tittle == res.tittle && i.tittle != section.tittle ))) {
+              this.bs.toast('Repeated section name, edit failed', 2000, 'top');
 
+            } else {
+              section.tittle = res.tittle;
+              section.message = res.description;
+              this.bs.toast('Edit section successfully', 2000, 'top');
+            }
           } else {
             this.bs.toast('Empty field, edit failed', 2000, 'top');
           }
@@ -148,14 +157,19 @@ export class NewFormPage implements OnInit {
         role: 'cancel'
       }, { 
         text: 'Ready', 
-        handler: (res) => {   
+        handler: (res) => {
           let inputs: Input[] = [{ message: 'Response:', id: null, responses: null }]
 
           if(this.bs.checkField([ res.question ])) {
-            (section.questions != null) 
-            ? section.questions.push({ tittle: res.question, type: 'Text', obligatory: true, inputs }) 
-            : section.questions = [{ tittle: res.question, type: 'Text', obligatory: true, inputs }];
-          
+            if (section.questions != null) {
+              (!section.questions.find(i => i.tittle == res.question))
+              ? section.questions.push({ tittle: res.question, type: 'Text', obligatory: true, inputs })
+              : this.bs.toast('Repeated question name', 2000, 'top');
+            
+            } else {
+              section.questions = [{ tittle: res.question, type: 'Text', obligatory: true, inputs }];
+            }
+        
           } else {
             this.bs.toast('Empty field', 2000, 'top');
           }
@@ -164,7 +178,7 @@ export class NewFormPage implements OnInit {
     );
   }
 
-  public editQuestion(question: Question) {
+  public editQuestion(question: Question, section: Section) {
     this.bs.alertWithInputs(
       'Edit question', 
       question.tittle,
@@ -179,8 +193,13 @@ export class NewFormPage implements OnInit {
         text: 'Ready', 
         handler: (res) => {   
           if (this.bs.checkField([ res.tittle ])) {
-            question.tittle = res.tittle;
-            this.bs.toast('Edit question successfully', 2000, 'top');
+            if(section.questions.find(i => (i.tittle == res.tittle && i.tittle != question.tittle))) {
+              this.bs.toast('Repeated question name, edit failed', 2000, 'top');
+
+            } else {
+              question.tittle = res.tittle;
+              this.bs.toast('Edit question successfully', 2000, 'top');
+            }
 
           } else {
             this.bs.toast('Empty field, edit failed', 2000, 'top');
@@ -221,9 +240,14 @@ export class NewFormPage implements OnInit {
         text: 'Ready', 
         handler: (res) => { 
           if(this.bs.checkField([ res.tittle ])) { 
-            (question.inputs != null)
-            ? question.inputs.push({ message: res.tittle, id: null, responses: null }) 
-            : question.inputs = [{ message: res.tittle, id: null, responses: null }];   
+            if(question.inputs != null) {
+              (!question.inputs.find(i => i.message == res.tittle))
+              ? question.inputs.push({ message: res.tittle, id: null, responses: null })
+              : this.bs.toast('Repeated input name', 2000, 'top');
+            
+            } else {
+              question.inputs = [{ message: res.tittle, id: null, responses: null }];
+            }    
           
           } else {
             this.bs.toast('Empty field', 2000, 'top');
@@ -233,7 +257,7 @@ export class NewFormPage implements OnInit {
     );
   }
 
-  public editInput(input: Input) {
+  public editInput(input: Input, question: Question) {
     this.bs.alertWithInputs(
       'Edit input', 
       input.message,
@@ -248,9 +272,14 @@ export class NewFormPage implements OnInit {
         text: 'Ready', 
         handler: (res) => {   
           if (this.bs.checkField([ res.tittle ])) {
-            input.message = res.tittle;
-            this.bs.toast('Edit question successfully', 2000, 'top');
+            if(question.inputs.find(i => (i.message == res.tittle && i.message != input.message))) {
+              this.bs.toast('Repeated input name, edit failed', 2000, 'top');
 
+            } else {
+              input.message = res.tittle;
+              this.bs.toast('Edit question successfully', 2000, 'top');
+            }
+            
           } else {
             this.bs.toast('Empty field, edit failed', 2000, 'top');
           }

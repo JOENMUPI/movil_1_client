@@ -18,9 +18,6 @@
   <ion-card *ngFor="let section of form.sections">
     <ion-card-header>
       <ion-item>
-        <ion-button slot="end" fill="outline" shape="round" color="medium" (click)="form.sections.push(section)">
-          <ion-icon name="documents-outline"></ion-icon>
-        </ion-button>
         <ion-button slot="end" fill="outline" shape="round" color="medium" (click)="editSection(section)" >
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
@@ -37,10 +34,7 @@
         <ion-item>
           <ion-label>{{ question.type }}</ion-label>
           <ion-button slot="end" fill="outline" shape="round" color="medium" (click)="editQuestionType(question)">Type</ion-button>
-          <ion-button slot="end" fill="outline" shape="round" color="medium" (click)="section.questions.push(question)">
-            <ion-icon name="documents-outline"></ion-icon>
-          </ion-button>
-          <ion-button slot="end" fill="outline" shape="round" color="medium" (click)="editQuestion(question)" >
+          <ion-button slot="end" fill="outline" shape="round" color="medium" (click)="editQuestion(question, section)" >
             <ion-icon name="create-outline"></ion-icon>
           </ion-button>
           <ion-button slot="end" fill="outline" shape="round" color="medium" (click)="deleteQuestion(section, question)">
@@ -53,7 +47,7 @@
       <ion-item *ngFor="let input of question.inputs">
         <ion-label>{{ input.message }}</ion-label>  
         <ion-button slot="end" fill="outline" shape="round" color="medium" 
-                    (click)="editInput(input)" *ngIf ="(question.type != 'Text')">
+                    (click)="editInput(input, question)" *ngIf ="(question.type != 'Text')">
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
         <ion-button slot="end" fill="outline" shape="round" color="medium" 

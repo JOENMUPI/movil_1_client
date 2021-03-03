@@ -219,7 +219,7 @@ export class FormPage implements OnInit {
     };
   }
 
-  public sendResponses() {
+  public sendResponses() { console.log('aqui', this.responses);
     if(this.checkresponses()) {
       this.bs.toast('Sending...', 2000, 'top');
       this.resHttpS.newResponses(this.ruteActivated.snapshot.params.formId, this.responses).then((res: Response) => {
