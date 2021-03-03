@@ -6,6 +6,7 @@ import { MenuHttpService } from 'src/app/services/http/menu-http.service';
 import { RoleHttpService } from 'src/app/services/http/role-http.service';
 import { FormHttpService } from 'src/app/services/http/form-http.service';
 import { BasicService } from '../../services/basic/basic.service';
+import { IonRefresher } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu-list',
@@ -203,7 +204,9 @@ export class MenuListPage implements OnInit {
           this.bs.toast(res.message, 2000, 'top');
           this.parent = res.body[0]; 
           for(let i = 1; i < res.body.length; i++) { 
-            this.menus.push(res.body[i]);
+            if(res.body[i].parent == this.parent.id) {
+              this.menus.push(res.body[i]);
+            }
           } 
 
           this.menuFlag = (this.menus.length <= 0); 
