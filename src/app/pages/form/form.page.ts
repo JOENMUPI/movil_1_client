@@ -100,6 +100,10 @@ export class FormPage implements OnInit {
             if(e.id == input.id) {
               this.responses.push({ inputId: e.id, data: { response: input.responses } }); 
             }
+
+            if(this.responses.find(i => i.inputId != e.id)) {
+              this.responses.push({ inputId: e.id, data: { response: false } });
+            }
           });
 
         } else {
@@ -219,7 +223,7 @@ export class FormPage implements OnInit {
     };
   }
 
-  public sendResponses() { console.log('aqui', this.responses);
+  public sendResponses() { 
     if(this.checkresponses()) {
       this.bs.toast('Sending...', 2000, 'top');
       this.resHttpS.newResponses(this.ruteActivated.snapshot.params.formId, this.responses).then((res: Response) => {
