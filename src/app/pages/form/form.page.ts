@@ -92,6 +92,12 @@ export class FormPage implements OnInit {
 
       case 'MultipleChoice': 
         if(this.responses.length > 0) {
+          question.inputs.forEach(e => {
+            if(!this.responses.find(i => i.inputId == e.id)) {
+              this.responses.push({ inputId: e.id, data: { response: false } });
+            }
+          });
+
           if(this.responses.find(i => i.inputId == input.id)) {
             this.responses = this.responses.filter(i => i.inputId != input.id);
           }
@@ -99,11 +105,7 @@ export class FormPage implements OnInit {
           question.inputs.forEach(e => {
             if(e.id == input.id) {
               this.responses.push({ inputId: e.id, data: { response: input.responses } }); 
-            }
-
-            if(this.responses.find(i => i.inputId != e.id)) {
-              this.responses.push({ inputId: e.id, data: { response: false } });
-            }
+            }       
           });
 
         } else {
@@ -112,7 +114,7 @@ export class FormPage implements OnInit {
             ? this.responses.push({ inputId: e.id, data: { response: input.responses } })
             : this.responses.push({ inputId: e.id, data: { response: false } }); 
           });
-        } 
+        } console.log('mirame', this.responses);
         break;
 
       case 'Hour':

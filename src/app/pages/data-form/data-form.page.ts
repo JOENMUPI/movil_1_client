@@ -59,7 +59,7 @@ export class DataFormPage implements OnInit {
 
               input.responses.forEach(res => { 
               if(res.response) { 
-                yes += 1 
+                yes += 1; 
               }
             });
 

@@ -37,6 +37,7 @@ export class MenuListPage implements OnInit {
   }
 
   ionViewWillEnter() { 
+    this.menus = [];
     this.checkUser();
     this.getMenus(); 
   }
