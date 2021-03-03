@@ -6,6 +6,7 @@ ion-content {
 }
 
 ion-card {
+  --ion-card-title-color:white;
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(0.2rem);
   z-index: 4;
@@ -13,8 +14,8 @@ ion-card {
 }
 
 ion-toolbar {
-  --ion-color-primary: #35414b;
-  --ion-color-primary-contrast: black;
+  --ion-color-tertiary: #35414b;
+  --ion-color-tertiary-contrast: black;
   
 }
 
@@ -35,7 +36,7 @@ h3 {
 }
 
 .card-icon {
-  color: black;
+  color: white;
   position: relative;
   left: 350px;
 }

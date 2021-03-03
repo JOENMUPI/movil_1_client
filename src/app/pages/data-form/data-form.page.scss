@@ -1,0 +1,43 @@
+ion-content {
+    --ion-background-color: linear-gradient(45deg, #b9b4b5, #35414b);
+  }
+  
+  ion-item {
+    --ion-background-color: transparent;
+  }
+  
+  ion-toolbar {
+    --ion-color-tertiary:#35414b ;
+    --ion-color-tertiary-contrast: white;
+  }
+  
+  ion-item-divider {
+    --ion-background-color: white;
+  }
+  ion-fab-button {
+    --ion-color-primary: transparent;
+    backdrop-filter: blur(25px);
+    background: linear-gradient(
+      to right bottom,
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.2)
+    );
+    border-radius: 50%;
+  }
+  
+  p {
+    text-align: left;
+    margin-left: 3vw;
+  }
+  
+  .questions {
+    text-align: center;
+  }
+  .title {
+    background: rgba(255, 255, 255, 0.3);
+    color: black;
+    backdrop-filter: blur(0.2rem);
+    z-index: 4;
+    border: 20px;
+    border-radius: 10px;
+  }

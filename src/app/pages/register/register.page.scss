@@ -17,6 +17,10 @@ ion-toolbar {
   --ion-color-tertiary-contrast: white;
 }
 
+ion-label{
+  --ion-color-primary:white;
+}
+
 ion-button {
   --ion-color-primary: #35414b;
   backdrop-filter: blur(25px);
