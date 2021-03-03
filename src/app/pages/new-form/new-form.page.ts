@@ -149,7 +149,7 @@ export class NewFormPage implements OnInit {
       }, { 
         text: 'Ready', 
         handler: (res) => {   
-          let inputs: Input[] = [{ message: 'Response:', id: null, response: null }]
+          let inputs: Input[] = [{ message: 'Response:', id: null, responses: null }]
 
           if(this.bs.checkField([ res.question ])) {
             (section.questions != null) 
@@ -222,8 +222,8 @@ export class NewFormPage implements OnInit {
         handler: (res) => { 
           if(this.bs.checkField([ res.tittle ])) { 
             (question.inputs != null)
-            ? question.inputs.push({ message: res.tittle, id: null, response: null }) 
-            : question.inputs = [{ message: res.tittle, id: null, response: null }];   
+            ? question.inputs.push({ message: res.tittle, id: null, responses: null }) 
+            : question.inputs = [{ message: res.tittle, id: null, responses: null }];   
           
           } else {
             this.bs.toast('Empty field', 2000, 'top');
@@ -286,7 +286,7 @@ export class NewFormPage implements OnInit {
         text: 'Ready', 
         handler: (res) => {   
           if(res.TypeInputs.text == 'Text') { 
-            question.inputs = [{ message: 'Response:', id: null, response: null }];
+            question.inputs = [{ message: 'Response:', id: null, responses: null }];
           }
 
           question.type = res.TypeInputs.text; 

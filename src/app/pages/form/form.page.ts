@@ -16,7 +16,7 @@ import { Question } from 'src/app/interfaces/question.model';
   styleUrls: ['./form.page.scss'],
 })
 export class FormPage implements OnInit {
-  private form: Form = { tittle: '', sections: null }
+  private form: Form = { tittle: 'Loading...', sections: null }
   private responses = [];
   private flag = false;
 
@@ -83,7 +83,7 @@ export class FormPage implements OnInit {
               ? this.checkArrResponses(question.inputs[0]) 
               : this.bs.toast('Empty field', 2000, 'top');
                
-              question.inputs[0].response = res.data; 
+              question.inputs[0].responses = res.data; 
               this.responses.push({ inputId: question.inputs[0].id, data: { response: res.data } }); 
             }
           }]
@@ -98,14 +98,14 @@ export class FormPage implements OnInit {
 
           question.inputs.forEach(e => {
             if(e.id == input.id) {
-              this.responses.push({ inputId: e.id, data: { response: input.response } }); 
+              this.responses.push({ inputId: e.id, data: { response: input.responses } }); 
             }
           });
 
         } else {
           question.inputs.forEach(e => {
             (e.id == input.id) 
-            ? this.responses.push({ inputId: e.id, data: { response: input.response } })
+            ? this.responses.push({ inputId: e.id, data: { response: input.responses } })
             : this.responses.push({ inputId: e.id, data: { response: false } }); 
           });
         } 
@@ -114,7 +114,7 @@ export class FormPage implements OnInit {
       case 'Hour':
       case 'Date': 
         this.checkArrResponses(input);
-        this.responses.push({ inputId: input.id, data: { response: input.response } }); 
+        this.responses.push({ inputId: input.id, data: { response: input.responses } }); 
         break;
 
       case 'List': 
@@ -133,7 +133,7 @@ export class FormPage implements OnInit {
           }, {
             text: 'Select', 
             handler: (res) => { 
-              question.inputs[0].response = res.Data.text 
+              question.inputs[0].responses = res.Data.text 
               question.inputs.forEach((e) => {
                 this.checkArrResponses(e);
 

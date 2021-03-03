@@ -15,6 +15,10 @@ export class ResponseHttpService {
 
   }
 
+  public getResponses(formId: number) {
+    return this.http.get(this.url + sessionStorage.id + '/' + formId, this.requestOptions).toPromise();
+  }
+
   public newResponses(formId: number, responses: any[]) {
     return this.http.post(this.url, { responses, formId, userId: sessionStorage.id }, this.requestOptions).toPromise();
   }
